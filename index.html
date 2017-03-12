@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>notafinal | UFPB</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container text-center">
+        <span class="glyphicon glyphicon-education" id="hat-icon" aria-hidden="true">notafinal</span>
+        <hr>
+        <h2 id="title">Digite suas notas para calcular a nota final</h2>
+        <h5 id="subtitle">Serão aceitas no mínimo 2 e no máximo 5 notas para o cálculo da média</h5>
+        <br><br>
+        <form class="form-inline">
+            <input type="text" class="form-control nota" maxlength="4" id="nota1" placeholder="Nota 1">
+            <input type="text" class="form-control nota" maxlength="4" id="nota2" placeholder="Nota 2">
+            <input type="text" class="form-control nota" maxlength="4" id="nota3" placeholder="Nota 3">
+        </form>
+
+        <br>
+        <button id="addBtn" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Adiciona uma nota">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar
+        </button>
+        <button id="removeBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Remove uma nota">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remover
+        </button>
+        <br><br>
+        <button type="submit" id="submit1" class="btn btn-calc btn-lg" style="width: 270px;">Calcular</button>
+
+    </div>
+    <!-- scripts -->
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>

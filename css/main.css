@@ -1,0 +1,58 @@
+body {
+  background-color: #77beec;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+hr {
+  width: 5%;
+  border: 0;
+  border-top: solid 1px rgba(224, 224, 224, 0.7);
+}
+
+.btn-calc {
+  margin-top: 10px;
+  background: #ff8a65;
+  border-radius: 10px;
+}
+
+.btn-calc:hover {
+  background: #ff7043;
+  color: white;
+}
+
+.btn-reset {
+  margin-top: 10px;
+  background: #7986cb;
+  border-radius: 10px;
+}
+
+.btn-reset:hover {
+  background: #5c6bc0;
+  color: white;
+}
+
+.transparent {
+  background-color: transparent;
+  border: none;
+}
+
+#hat-icon {
+  letter-spacing: 2px;
+  font-size: 4em;
+  padding-top: 25px;
+}
+
+#add {
+  color: lightgreen;
+}
+
+#remove {
+  color: red;
+}
+
+.nota {
+  display: inline-block;
+  text-align: center;
+  max-width: 80px;
+}

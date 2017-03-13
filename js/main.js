@@ -20,55 +20,73 @@ $(document).ready(function() {
     });
 
     $("#submit1").click(function() {
+        var finalResult = 0;
         defineNotas();
         calcNota = calcNota(nota1, nota2, nota3, nota4, nota5);
 
-        if (calcNota < 0 || calcNota > 10) {
-            alert("Você digitou uma nota inválida, tente novamente");
-            location.reload();
-        }
+        if (calcNota >= 4 && calcNota < 7) {
 
-        if (calcNota >= 7 && calcNota <= 10) {
-            $("body").css("background-color", "#388e3c");
-            $("footer").css("background-color", "#2a702d");
-            $("#title").text('Sua média foi ' + calcNota.toFixed(1) + 'Parabéns, você passou!');
-
-            usingBreakLine(17);
-            removeThings();
-            createResetBtn();
-
-        } else if (calcNota < 4) {
-            $("body").css("background-color", "#e53935");
-            $("footer").css("background-color", "#bb302d");
-            $("#title").text("Sua média foi " + calcNota.toFixed(1) + "Você não passou :( ");
-
-
-            usingBreakLine(17);
-            removeThings();
-            createResetBtn();
-
-        } else {
             nota = calcNota.toFixed(1);
             $("body").css("background-color", "#FFD740");
             $("footer").css("background-color", "#d5b334");
-            $("#title").text("Sua média foi " + nota + "Você terá que fazer a prova final precisando tirar " + calcNotaFinal(Number(nota)) + "   Boa sorte!");
+            $("#title").text("Sua média foi " + nota + "Você terá que fazer a prova final precisando tirar " + calcQuantoPrecisa(Number(nota)));
 
             usingBreakLine(17);
             usingBreakLine(76);
-            usingBreakLine(76);
-
             removeThings();
+
+            createFinalSubtitle();
+            createFinalNoteInput();
+            calcBtn(calcQuantoPrecisa(Number(nota)), finalResult);
             createResetBtn();
+
+        } else if (calcNota >= 7 && calcNota <= 10) {
+            success(calcNota.toFixed(1));
+
+            if (calcNota == 10) {
+              usingBreakLine(18);
+            } else {
+              usingBreakLine(17);
+            }
+
+            createResetBtn();
+
+        } else if (calcNota < 4) {
+            fail(calcNota.toFixed(1));
+            usingBreakLine(17);
+            createResetBtn();
+
+        } else {
+            invalid();
         }
 
     });
 
 });
 
+function invalid() {
+    alert("Você digitou uma nota inválida, tente novamente");
+    location.reload();
+}
+
 function usingBreakLine(index) {
-    var title = $("#title").html();
-    title = title.substring(0, index) + "<br>" + title.substring(index);
-    $("#title").html(title);
+    var $title = $("#title").html();
+    $title = $title.substring(0, index) + "<br>" + $title.substring(index);
+    $("#title").html($title);
+}
+
+function createFinalNoteInput() {
+    var $input = $("<input>", {
+        id: "notaFinal",
+        "class": "form-control nota",
+        "maxLength": 4,
+        "placeholder": "Nota"
+    });
+    $(".form-inline").append($input);
+}
+
+function createFinalSubtitle() {
+    $("#title").append("<h3>Digite sua nota no exame final:</h3>");
 }
 
 function createResetBtn() {
@@ -81,6 +99,55 @@ function createResetBtn() {
         location.reload();
     });
     $(".container").append($button);
+}
+
+function calcBtn(nota, finalResult) {
+    var $button = $("<button>", {
+        id: "submitFinal",
+        "class": "btn btn-calc btn-lg"
+    });
+    $button.text("Calcular");
+    $button.click(function() {
+        notaFinal = $('#notaFinal').val();
+        if (notaFinal != '') {
+            finalResult = calcNotaFinal(nota, notaFinal);
+            verifyFinalResult(finalResult.toFixed(1));
+        }
+
+    });
+    $(".container").append($button);
+}
+
+function verifyFinalResult(finalResult) {
+    if (finalResult >= 5 && finalResult < 10) {
+        success(finalResult);
+        usingBreakLine(17);
+        $("#notaFinal").remove();
+        $("#submitFinal").remove();
+    } else if (finalResult < 5 && finalResult >= 0) {
+        fail(finalResult);
+        usingBreakLine(17);
+        $("#notaFinal").remove();
+        $("#submitFinal").remove();
+    } else {
+      invalid();
+    }
+}
+
+function fail(nota) {
+    $("body").css("background-color", "#e53935");
+    $("footer").css("background-color", "#bb302d");
+    $("#title").text("Sua média foi " + nota + "Você não passou :( ");
+
+    removeThings();
+
+}
+
+function success(nota) {
+    $("body").css("background-color", "#388e3c");
+    $("footer").css("background-color", "#2a702d");
+    $("#title").text('Sua média foi ' + nota + 'Parabéns, você passou!')
+    removeThings();
 }
 
 function calcNota(p1, p2, p3, p4, p5) {
@@ -138,99 +205,12 @@ function removeThings() {
     $("#submit1").remove();
 }
 
-function calcNotaFinal(element) {
-    switch (element) {
-        case 4.0:
-            return 6.5;
-            break;
-        case 4.1:
-            return 6.35;
-            break;
-        case 4.2:
-            return 6.2;
-            break;
-        case 4.3:
-            return 6.05
-            break;
-        case 4.4:
-            return 5.9;
-            break;
-        case 4.5:
-            return 5.75;
-            break;
-        case 4.6:
-            return 5.6;
-            break;
-        case 4.7:
-            return 5.45;
-            break;
-        case 4.8:
-            return 5.3;
-            break;
-        case 4.9:
-            return 5.15;
-            break;
-        case 5.0:
-            return 5;
-            break;
-        case 5.1:
-            return 4.85;
-            break;
-        case 5.2:
-            return 4.7;
-            break;
-        case 5.3:
-            return 4.55;
-            break;
-        case 5.4:
-            return 4.4;
-            break;
-        case 5.5:
-            return 4.25;
-            break;
-        case 5.6:
-            return 4.1;
-            break;
-        case 5.7:
-            return 3.95;
-            break;
-        case 5.8:
-            return 3.8;
-            break;
-        case 5.9:
-            return 3.65;
-            break;
-        case 6.0:
-            return 3.5;
-            break;
-        case 6.1:
-            return 3.35;
-            break;
-        case 6.2:
-            return 3.2;
-            break;
-        case 6.3:
-            return 3.05;
-            break;
-        case 6.4:
-            return 2.9;
-            break;
-        case 6.5:
-            return 2.75;
-            break;
-        case 6.6:
-            return 2.6;
-            break;
-        case 6.7:
-            return 2.45;
-            break;
-        case 6.8:
-            return 2.3;
-            break;
-        case 6.9:
-            return 2.15;
-            break;
-        default:
-            return 0;
-    }
+function calcQuantoPrecisa(element) {
+    diff = element - 4.0;
+    return (6.5 - diff * 1.5).toFixed(1);
+}
+
+function calcNotaFinal(media, notaFinal) {
+    diff = media - notaFinal;
+    return Number((-(diff * 0.4) + 5.0));
 }

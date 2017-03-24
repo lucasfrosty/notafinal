@@ -6,6 +6,10 @@ html {
   margin-right: 10px;
 }
 
+#title2 {
+  margin-top: 5px;
+}
+
 body {
     background-color: #77beec;
     color: white;

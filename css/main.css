@@ -18,7 +18,7 @@ body {
 }
 
 footer {
-    position: absolute;
+    position: relative;
     width: 100%;
     padding: 12px;
     text-align: center;
@@ -87,6 +87,5 @@ a:hover {
 }
 
 .container {
-  min-height: 100%;
-  position: relative;
+  min-height: 93.5%;
 }

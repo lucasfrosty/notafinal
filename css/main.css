@@ -18,7 +18,7 @@ body {
 }
 
 footer {
-    position: relative;
+    position: fixed;
     width: 100%;
     padding: 12px;
     text-align: center;
@@ -84,4 +84,8 @@ a:hover {
     text-decoration: none;
     border: 0;
     color: white;
+}
+
+.container {
+  height: 100%;
 }

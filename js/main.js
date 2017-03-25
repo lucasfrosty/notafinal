@@ -94,6 +94,7 @@ function createTitle2(text) {
 function createFinalNoteInput() {
   var $input = $("<input>", {
     id: "notaFinal",
+    "type": "tel",
     "class": "form-control nota",
     "maxLength": 4,
     "placeholder": "Nota"

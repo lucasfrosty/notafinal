@@ -2,11 +2,11 @@ html {
     height: 100%;
 }
 
-#submitFinal {
+#submit-final {
   margin-right: 10px;
 }
 
-#title2 {
+#new-subtitle {
   margin-top: 5px;
 }
 
@@ -68,7 +68,7 @@ hr {
     padding-top: 25px;
 }
 
-.nota {
+.grid {
     display: inline-block;
     text-align: center;
     max-width: 80px;

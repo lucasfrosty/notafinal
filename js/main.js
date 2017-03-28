@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $(".nota").keydown(function(e) {
+  $(".grid").keydown(function(e) {
     // Allow: backspace, delete, tab, escape, enter and .
     if ($.inArray(e.keyCode, [
       46,
@@ -27,28 +27,29 @@ $(document).ready(function() {
     }
   });
 
-  $("#submit1").click(function() {
+  $("#submit-button").click(function() {
     var finalResult = 0;
     var avarage = getAvarage();
 
     if (avarage >= 4 && avarage < 7) {
 
-      nota = avarage.toFixed(2);
+      grid = avarage.toFixed(2);
       $("body").css("background-color", "#FFD740");
       $("footer").css("background-color", "#d5b334");
-      $("#title").text("Sua média foi " + nota);
-      createTitle2("Você terá que fazer a prova final precisando tirar " + calcHowMuchNeeded(Number(nota)));
-      removeThings();
+      $("#title").text("Sua média foi " + grid);
+      createNewSubtitle("Você terá que fazer a prova final precisando tirar " + howMuchNeededToPass(Number(grid)));
 
-      createFinalSubtitle();
-      createFinalNoteInput();
-      calcBtn(calcHowMuchNeeded(Number(nota)), finalResult);
+      removeSomeThings();
+
+      createFinalGridText();
+      createFinalGridInput();
+      calcButton(howMuchNeededToPass(Number(grid)), finalResult);
 
     } else if (avarage >= 7 && avarage <= 10) {
-      success(avarage.toFixed(2));
+      failOrSuccess(avarage.toFixed(2), true, false);
 
     } else if (avarage < 4) {
-      fail(avarage.toFixed(2));
+      failOrSuccess(avarage.toFixed(2), false, false);
     } else {
       invalid();
     }
@@ -57,132 +58,156 @@ $(document).ready(function() {
 
 });
 
-function getAvarage() {
-  const notasLength = 5;
-  var arr = [];
-  var result = 0;
-  var counter = 0;
-
-  for (var i = 1; i <= notasLength; i++) {
-    arr.push($(`#nota${i}`).val());
+function verifyIfInputIsNull(arg) {
+  if (arg != '') {
+    return true;
+  } else {
+    return false;
   }
+}
 
+function getValidGrids () {
+  var grids = [];
+  const inputsLength = 5;
 
-  for (i = 0; i < arr.length; i++) {
-    if (arr[i] != '') {
-      result += Number(arr[i]);
-      counter++;
+  for (var i = 1; i <= inputsLength; i++) {
+    if (verifyIfInputIsNull($(`#grid${i}`).val())) {
+      grids.push(Number($(`#grid${i}`).val()));
     }
   }
 
-  return (result / counter);
+  return grids;
+}
+
+function getAvarage() {
+  var grids = getValidGrids();
+
+  var sumGrids = grids.reduce((sumGrids, grid) => sumGrids + grid, 0);
+  var avarage = sumGrids / grids.length;
+
+  return avarage;
 }
 
 function invalid() {
-  alert("Você digitou uma nota inválida, tente novamente");
+  alert("Você digitou uma grid inválida, tente novamente");
   location.reload();
 }
 
-function createTitle2(text) {
-  var $title2 = $("<h3>", {
-    id: "title2"
+function createNewSubtitle(text) {
+  var $new_subtitle = $("<h3>", {
+    id: "new-subtitle"
   });
-  $title2.text(text);
-  $("#title").append($title2);
+  $new_subtitle.text(text);
+  $("#title").append($new_subtitle);
 }
 
-function createFinalNoteInput() {
-  var $input = $("<input>", {
-    id: "notaFinal",
-    "type": "tel",
-    "class": "form-control nota",
-    "maxLength": 4,
-    "placeholder": "Nota"
-  });
-  $(".form-inline").append($input);
-}
-
-function createFinalSubtitle() {
+function createFinalGridText() {
   $("#title").append("<h3>Digite sua nota no exame final:</h3>");
 }
 
-function createResetBtn() {
-  var $button = $("<button>", {
-    id: "resetBtn",
-    "class": "btn btn-reset btn-lg"
+function createFinalGridInput() {
+  var $final_input = $("<input>", {
+    id: "final-input",
+    "type": "tel",
+    "class": "form-control grid",
+    "maxLength": 4,
+    "placeholder": "Nota"
   });
-  $button.text("Voltar");
-  $button.click(function() {
-    location.reload();
-  });
-  $(".container").append($button);
+  $(".form-inline").append($final_input);
 }
 
-function calcBtn(nota, finalResult) {
-  var $button = $("<button>", {
-    id: "submitFinal",
+function createResetButton() {
+  var $reset_button = $("<button>", {
+    id: "reset-button",
+    "class": "btn btn-reset btn-lg"
+  });
+  $reset_button.text("Voltar");
+  $reset_button.click(function() {
+    location.reload();
+  });
+  $(".container").append($reset_button);
+}
+
+function calcButton(grid, finalResult) {
+  var $calc_button = $("<button>", {
+    id: "submit-final",
     "class": "btn btn-calc btn-lg"
   });
-  $button.text("Calcular");
-  $button.click(function() {
-    notaFinal = $('#notaFinal').val();
-    if (notaFinal != '') {
-      finalResult = calcFinalNote(nota, notaFinal);
+  $calc_button.text("Calcular");
+  $calc_button.click(function() {
+    gridFinal = $('#final-input').val();
+    if (verifyIfInputIsNull(gridFinal)) {
+      finalResult = calcFinalGrid(grid, gridFinal);
       verifyFinalResult(finalResult.toFixed(2));
     }
 
   });
-  $(".container").append($button);
+  $(".container").append($calc_button);
 }
 
 function verifyFinalResult(finalResult) {
+
+  ((removeInputAndCalcButton) = () => {
+    $("#final-input").remove();
+    $("#submit-final").remove();
+  })();
+
   if (finalResult >= 5 && finalResult < 10) {
-    success(finalResult);
-    $("#notaFinal").remove();
-    $("#submitFinal").remove();
+    failOrSuccess(finalResult, true, true);
   } else if (finalResult < 5 && finalResult >= 0) {
-    fail(finalResult);
-    $("#notaFinal").remove();
-    $("#submitFinal").remove();
+    failOrSuccess(finalResult, false, true);
   } else {
     invalid();
   }
+
 }
 
-function fail(nota) {
-  $("body").css("background-color", "#e53935");
-  $("footer").css("background-color", "#bb302d");
-  $("#title").text("Sua média foi " + nota);
-  createTitle2("Você não passou :(");
-  removeThings();
-  createResetBtn();
+function failOrSuccess(grid, failOrSuccess, isFinalInput) {
+
+  if (failOrSuccess) {
+    var content = {
+      bodyBackgroundColor: "#388e3c",
+      footerBackgroundColor: "#2a702d",
+      subtitleText: "Parabéns, você passou!"
+    };
+  }
+  else {
+    var content = {
+      bodyBackgroundColor: "#e53935",
+      footerBackgroundColor: "#bb302d",
+      subtitleText: "Você não passou :("
+    };
+  }
+
+  if (!isFinalInput) {
+    removeSomeThings();
+  }
+
+  $("body").css("background-color", content.bodyBackgroundColor);
+  $("footer").css("background-color", content.footerBackgroundColor);
+  $("#title").text("Sua média foi " + grid);
+  createNewSubtitle(content.subtitleText);
+  createResetButton();
+
 }
 
-function success(nota) {
-  $("body").css("background-color", "#388e3c");
-  $("footer").css("background-color", "#2a702d");
-  $("#title").text("Sua média foi " + nota);
-  createTitle2("Parabéns, você passou!");
-  removeThings();
-  createResetBtn();
-}
+function removeSomeThings() {
 
-function removeThings() {
   $("#subtitle").remove();
-  $("#nota1").remove();
-  $("#nota2").remove();
-  $("#nota3").remove();
-  $("#nota4").remove();
-  $("#nota5").remove();
-  $("#submit1").remove();
+  $("#grid1").remove();
+  $("#grid2").remove();
+  $("#grid3").remove();
+  $("#grid4").remove();
+  $("#grid5").remove();
+  $("#submit-button").remove();
 }
 
-function calcHowMuchNeeded(element) {
+function howMuchNeededToPass(element) {
   diff = element - 4.0;
   return (6.5 - diff * 1.5).toFixed(2);
 }
 
-function calcFinalNote(media, notaFinal) {
-  diff = media - notaFinal;
+function calcFinalGrid(media, gridFinal) {
+  diff = media - gridFinal;
   return Number(5.0 - (diff * 0.4));
 }

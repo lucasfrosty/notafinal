@@ -6,14 +6,33 @@ html {
   margin-right: 10px;
 }
 
-#new-subtitle {
+#final-subtitle-2 {
+  padding-top: 12px;
+}
+
+h2 {
+  font-size: 1.63em;
+}
+
+h3 {
+  font-size: 0.76em;
   margin-top: 5px;
+}
+
+#subtitle {
+  margin-top: 0;
+  padding-bottom: 15px;
+}
+
+#title {
+  margin-bottom: 5px;
 }
 
 body {
     background-color: #77beec;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', serif;
+
     height: 100%;
 }
 

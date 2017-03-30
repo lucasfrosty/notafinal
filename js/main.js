@@ -1,15 +1,10 @@
+const GRIDS_LENGTH = 5;
+
 $(document).ready(function() {
   $(".grid").keydown(function(e) {
     // Allow: backspace, delete, tab, escape, enter and .
-    if ($.inArray(e.keyCode, [
-      46,
-      8,
-      9,
-      27,
-      13,
-      110,
-      190
-    ]) !== -1 ||
+    if ($.inArray(
+    e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
     // Allow: Ctrl/cmd+A
     (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
     // Allow: Ctrl/cmd+C
@@ -27,8 +22,9 @@ $(document).ready(function() {
     }
   });
 
+
+
   $("#submit-button").click(function() {
-    var finalResult = 0;
     var avarage = getAvarage();
 
     if (avarage >= 4 && avarage < 7) {
@@ -37,13 +33,15 @@ $(document).ready(function() {
       $("body").css("background-color", "#FFD740");
       $("footer").css("background-color", "#d5b334");
       $("#title").text("Sua média foi " + grid);
-      createNewSubtitle("Você terá que fazer a prova final precisando tirar " + howMuchNeededToPass(Number(grid)));
+      createNewSubtitle("Você terá que fazer a prova final precisando tirar "
+      + howMuchNeededToPass(Number(grid)), "final-subtitle");
 
-      removeSomeThings();
+      removeThings();
 
-      createFinalGridText();
+      createNewSubtitle("Digite sua nota no exame final:", "final-subtitle-2");
+      // createFinalGridText();
       createFinalGridInput();
-      calcButton(howMuchNeededToPass(Number(grid)), finalResult);
+      calcButton(howMuchNeededToPass(Number(grid)));
 
     } else if (avarage >= 7 && avarage <= 10) {
       failOrSuccess(avarage.toFixed(2), true, false);
@@ -59,20 +57,15 @@ $(document).ready(function() {
 });
 
 function verifyIfInputIsNull(arg) {
-  if (arg != '') {
-    return true;
-  } else {
-    return false;
-  }
+  return (arg != '');
 }
 
 function getValidGrids () {
   var grids = [];
-  const inputsLength = 5;
 
-  for (var i = 1; i <= inputsLength; i++) {
-    if (verifyIfInputIsNull($(`#grid${i}`).val())) {
-      grids.push(Number($(`#grid${i}`).val()));
+  for (var i = 1; i <= GRIDS_LENGTH; i++) {
+    if (verifyIfInputIsNull($(`#grid-${i}`).val())) {
+      grids.push(Number($(`#grid-${i}`).val()));
     }
   }
 
@@ -81,7 +74,6 @@ function getValidGrids () {
 
 function getAvarage() {
   var grids = getValidGrids();
-
   var sumGrids = grids.reduce((sumGrids, grid) => sumGrids + grid, 0);
   var avarage = sumGrids / grids.length;
 
@@ -89,20 +81,16 @@ function getAvarage() {
 }
 
 function invalid() {
-  alert("Você digitou uma grid inválida, tente novamente");
+  alert("Você digitou uma nota inválida, tente novamente");
   location.reload();
 }
 
-function createNewSubtitle(text) {
+function createNewSubtitle(text, id) {
   var $new_subtitle = $("<h3>", {
-    id: "new-subtitle"
+    id: id
   });
   $new_subtitle.text(text);
   $("#title").append($new_subtitle);
-}
-
-function createFinalGridText() {
-  $("#title").append("<h3>Digite sua nota no exame final:</h3>");
 }
 
 function createFinalGridInput() {
@@ -137,7 +125,7 @@ function calcButton(grid, finalResult) {
   $calc_button.click(function() {
     gridFinal = $('#final-input').val();
     if (verifyIfInputIsNull(gridFinal)) {
-      finalResult = calcFinalGrid(grid, gridFinal);
+      var finalResult = calcFinalGrid(grid, gridFinal);
       verifyFinalResult(finalResult.toFixed(2));
     }
 
@@ -180,26 +168,25 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
   }
 
   if (!isFinalInput) {
-    removeSomeThings();
+    removeThings();
   }
 
   $("body").css("background-color", content.bodyBackgroundColor);
   $("footer").css("background-color", content.footerBackgroundColor);
   $("#title").text("Sua média foi " + grid);
-  createNewSubtitle(content.subtitleText);
+  createNewSubtitle(content.subtitleText, "new-subtitle");
   createResetButton();
 
 }
 
-function removeSomeThings() {
-
+function removeThings() {
   $("#subtitle").remove();
-  $("#grid1").remove();
-  $("#grid2").remove();
-  $("#grid3").remove();
-  $("#grid4").remove();
-  $("#grid5").remove();
   $("#submit-button").remove();
+
+  for (var i = 1; i <= GRIDS_LENGTH; i++) {
+    $(`#grid-${i}`).remove();
+  }
+
 }
 
 function howMuchNeededToPass(element) {

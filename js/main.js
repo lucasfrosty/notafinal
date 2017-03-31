@@ -29,7 +29,7 @@ $(document).ready(function() {
 
     if (avarage >= 4 && avarage < 7) {
 
-      grid = avarage.toFixed(2);
+      var grid = avarage.toFixed(2);
       $("body").css("background-color", "#FFD740");
       $("footer").css("background-color", "#d5b334");
       $("#title").text("Sua média foi " + grid);
@@ -66,6 +66,7 @@ function getValidGrids () {
   for (var i = 1; i <= GRIDS_LENGTH; i++) {
     if (verifyIfInputIsNull($(`#grid-${i}`).val())) {
       grids.push(Number($(`#grid-${i}`).val()));
+      $(`#grid-${i}`).val('');
     }
   }
 

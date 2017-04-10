@@ -191,11 +191,11 @@ function removeThings() {
 }
 
 function howMuchNeededToPass(element) {
-  diff = element - 4.0;
+  var diff = element - 4.0;
   return (6.5 - diff * 1.5).toFixed(2);
 }
 
 function calcFinalGrid(media, gridFinal) {
-  diff = media - gridFinal;
+  var diff = media - gridFinal;
   return Number(5.0 - (diff * 0.4));
 }

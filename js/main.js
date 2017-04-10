@@ -124,7 +124,7 @@ function calcButton(grid, finalResult) {
   });
   $calc_button.text("Calcular");
   $calc_button.click(function() {
-    gridFinal = $('#final-input').val();
+    var gridFinal = $('#final-input').val();
     if (verifyIfInputIsNull(gridFinal)) {
       var finalResult = calcFinalGrid(grid, gridFinal);
       verifyFinalResult(finalResult.toFixed(2));

@@ -136,11 +136,11 @@ function calcButton(grid, finalResult) {
 
 function verifyFinalResult(finalResult) {
 
-  ((removeInputAndCalcButton) = () => {
+  (function removeInputAndCalcButton () {
     $("#final-input").remove();
     $("#submit-final").remove();
   })();
-
+  
   if (finalResult >= 5 && finalResult < 10) {
     failOrSuccess(finalResult, true, true);
   } else if (finalResult < 5 && finalResult >= 0) {

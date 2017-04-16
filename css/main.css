@@ -124,6 +124,17 @@ hr {
     box-shadow: 0px 2px 5px #666;
 }
 
+@media screen and (max-width: 480px) {
+  .container {
+    min-height: 83%;
+  }
+
+  #floating-button {
+    bottom: 10px;
+    right: 20px;
+  }
+}
+
 footer {
     position: relative;
     padding: 12px;

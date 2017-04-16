@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 body {
     background-color: #649DAD;
     color: white;
@@ -5,6 +9,7 @@ body {
     font-family: 'Fira Sans', sans-serif;
     height: 100%;
 }
+
 
 .title-font {
   font-family: 'Bree Serif', serif;
@@ -113,11 +118,17 @@ hr {
     height: 55px;
     border-radius: 50%;
     background: #dd6363;
-    position: fixed;
-    bottom: 30px;
+    position: relative;
     right: 30px;
     cursor: pointer;
     box-shadow: 0px 2px 5px #666;
+}
+
+footer {
+    position: relative;
+    padding: 12px;
+    text-align: center;
+    bottom: 0;
 }
 
 #myModal {
@@ -139,7 +150,7 @@ hr {
 }
 
 .modal-body {
-  padding: 15px 20px 4px 20px;
+  padding: 15px 15px 4px 15px;
 }
 
 .github-link-icon {
@@ -186,4 +197,8 @@ a:hover {
     text-decoration: none;
     border: 0;
     color: white;
+}
+
+.container {
+  min-height: 87%;
 }

@@ -165,7 +165,7 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
   else {
     var content = {
       bodyBackgroundColor: "#BC4F4F",
-      iconBackgroundColor: "#499149",
+      iconBackgroundColor: "#3c8ca3",
       subtitleText: "Você não passou :("
     };
   }
@@ -178,6 +178,7 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
   $("#floating-button").css("background", content.iconBackgroundColor);
   $("#title").text("Sua média foi " + grid);
   createNewSubtitle(content.subtitleText, "new-subtitle");
+  $('#reset-button').remove();
   createResetButton('btn-reset');
 
 }

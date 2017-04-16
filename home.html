@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="images/favicon.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/min/main.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Fira+Sans" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
@@ -23,7 +23,7 @@
 
 <body>
     <div class="container text-center">
-        <span class="glyphicon glyphicon-education" id="hat-icon" aria-hidden="true">notafinal</span>
+        <div class="title"><span class="glyphicon glyphicon-education" id="hat-icon" aria-hidden="true"></span><span class="title-font">notafinal</span></div>
         <hr>
         <h2 id="title">Digite suas notas para calcular a média final</h2>
         <h6 id="subtitle">Os campos deixados em branco serão desconsiderados no cálculo da média.</h6>
@@ -39,10 +39,37 @@
         <button type="submit" id="submit-button" class="btn btn-calc btn-lg">Calcular</button>
 
 
+        <div id="floating-button" data-toggle="modal" data-target="#myModal">
+          <i class="glyphicon glyphicon-search float-icon"></i>
+        </div>
 
     </div>
 
-    <footer>Copyright &copy <a href="https://lucasfrosty.github.io/">Lucas Ferreira</a></footer>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center" id="myModalLabel">Informações</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Sobre os cálculos:</h4>
+            <ul>
+              <li>Primeiramente, calcula-se a média aritmética de todas as notas <b>digitadas</b> (as notas deixadas em branco serão desconsideradas na hora do cálculo)</li>
+              <li>Caso a média seja maior do que 7, o aluno está aprovado. Caso seja menor que 4, o aluno está reprovado. Caso esteja entre 4 e 7, o aluno terá direito a fazer o exame final.</li>
+              <li>Para ser aprovado no exame final o aluno precisa atingir uma média <b>maior ou igual a 5</b>. Seu cálculo é feito através da média final (60%) e a nota no exame final (40%).</li>
+              <br><p class="pull-right modal-font-small">Esse site foi feito de maneira independente, sem qualquer tipo de ligação oficial à UFPB.</p>
+            </ul>
+
+          </div>
+          <div class="modal-footer">
+            <p class="text-center">&copy Copyright 2017 - <a class="my-name" href="https://lucasfrosty.github.io/">Lucas Ferreira</a> <a href="https://github.com/lucasfrosty/notafinal" class="pull-right github-link-icon"><img src="https://maxcdn.icons8.com/windows8/PNG/26/Logos/github_copyrighted-26.png" width="20"/></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <footer>Copyright &copy <a href="https://lucasfrosty.github.io/">Lucas Ferreira</a></footer> -->
 
     <!-- scripts -->
     <script type="text/javascript" src="js/min/jquery-3.1.1.min.js"></script>

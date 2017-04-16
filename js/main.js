@@ -30,8 +30,7 @@ $(document).ready(function() {
     if (avarage >= 4 && avarage < 7) {
 
       var grid = avarage.toFixed(2);
-      $("body").css("background-color", "#FFD740");
-      $("footer").css("background-color", "#d5b334");
+      $("body").css("background-color", "#dfba33");
       $("#title").text("Sua média foi " + grid);
       createNewSubtitle("Você terá que fazer a prova final precisando tirar "
       + howMuchNeededToPass(Number(grid)), "final-subtitle");
@@ -42,6 +41,7 @@ $(document).ready(function() {
       // createFinalGridText();
       createFinalGridInput();
       calcButton(howMuchNeededToPass(Number(grid)));
+      createResetButton('btn-reset-sm');
 
     } else if (avarage >= 7 && avarage <= 10) {
       failOrSuccess(avarage.toFixed(2), true, false);
@@ -105,22 +105,25 @@ function createFinalGridInput() {
   $(".form-inline").append($final_input);
 }
 
-function createResetButton() {
+function createResetButton(buttonClass) {
+
   var $reset_button = $("<button>", {
     id: "reset-button",
-    "class": "btn btn-reset btn-lg"
+    "class": "btn btn-lg " + buttonClass
   });
   $reset_button.text("Voltar");
   $reset_button.click(function() {
     location.reload();
   });
+
   $(".container").append($reset_button);
+  $(".container").append($reset_button_sm);
 }
 
 function calcButton(grid, finalResult) {
   var $calc_button = $("<button>", {
     id: "submit-final",
-    "class": "btn btn-calc btn-lg"
+    "class": "btn btn-calc-sm btn-lg"
   });
   $calc_button.text("Calcular");
   $calc_button.click(function() {
@@ -140,7 +143,7 @@ function verifyFinalResult(finalResult) {
     $("#final-input").remove();
     $("#submit-final").remove();
   })();
-  
+
   if (finalResult >= 5 && finalResult < 10) {
     failOrSuccess(finalResult, true, true);
   } else if (finalResult < 5 && finalResult >= 0) {
@@ -155,15 +158,14 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
 
   if (failOrSuccess) {
     var content = {
-      bodyBackgroundColor: "#388e3c",
-      footerBackgroundColor: "#2a702d",
+      bodyBackgroundColor: "#499149",
       subtitleText: "Parabéns, você passou!"
     };
   }
   else {
     var content = {
-      bodyBackgroundColor: "#e53935",
-      footerBackgroundColor: "#bb302d",
+      bodyBackgroundColor: "#BC4F4F",
+      iconBackgroundColor: "#499149",
       subtitleText: "Você não passou :("
     };
   }
@@ -173,10 +175,10 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
   }
 
   $("body").css("background-color", content.bodyBackgroundColor);
-  $("footer").css("background-color", content.footerBackgroundColor);
+  $("#floating-button").css("background", content.iconBackgroundColor);
   $("#title").text("Sua média foi " + grid);
   createNewSubtitle(content.subtitleText, "new-subtitle");
-  createResetButton();
+  createResetButton('btn-reset');
 
 }
 

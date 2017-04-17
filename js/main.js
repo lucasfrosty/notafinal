@@ -124,9 +124,11 @@ function calcButton(grid, finalResult) {
   $calc_button.text("Calcular");
   $calc_button.click(function() {
     var gridFinal = $('#final-input').val();
-    if (gridFinal) {
+    if (gridFinal && (gridFinal >= 0 && gridFinal <= 10)) {
       var finalResult = calcFinalGrid(grid, gridFinal);
       verifyFinalResult(finalResult.toFixed(2));
+    } else {
+      alert('Nota inválida, tente novamente');
     }
 
   });

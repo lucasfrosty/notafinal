@@ -40,8 +40,8 @@ $(document).ready(function() {
       createNewSubtitle("Digite sua nota no exame final:", "final-subtitle-2");
       // createFinalGridText();
       createFinalGridInput();
-      calcButton(howMuchNeededToPass(Number(grid)));
       createResetButton('btn-reset-sm');
+      calcButton(howMuchNeededToPass(Number(grid)));
 
     } else if (avarage >= 7 && avarage <= 10) {
       failOrSuccess(avarage.toFixed(2), true, false);
@@ -56,15 +56,12 @@ $(document).ready(function() {
 
 });
 
-function verifyIfInputIsNull(arg) {
-  return (arg != '');
-}
 
 function getValidGrids () {
   var grids = [];
 
   for (var i = 1; i <= GRIDS_LENGTH; i++) {
-    if (verifyIfInputIsNull($(`#grid-${i}`).val())) {
+    if (($(`#grid-${i}`).val())) {
       grids.push(Number($(`#grid-${i}`).val()));
       $(`#grid-${i}`).val('');
     }
@@ -117,7 +114,6 @@ function createResetButton(buttonClass) {
   });
 
   $(".container").append($reset_button);
-  $(".container").append($reset_button_sm);
 }
 
 function calcButton(grid, finalResult) {
@@ -128,7 +124,7 @@ function calcButton(grid, finalResult) {
   $calc_button.text("Calcular");
   $calc_button.click(function() {
     var gridFinal = $('#final-input').val();
-    if (verifyIfInputIsNull(gridFinal)) {
+    if (gridFinal) {
       var finalResult = calcFinalGrid(grid, gridFinal);
       verifyFinalResult(finalResult.toFixed(2));
     }

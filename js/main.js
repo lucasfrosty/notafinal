@@ -34,6 +34,7 @@ $(document).ready(function() {
       $("#title").text("Sua média foi " + grid);
       createNewSubtitle("Você terá que fazer a prova final precisando tirar "
       + howMuchNeededToPass(Number(grid)), "final-subtitle");
+      $("meta[name=theme-color]").setAttribute("content", "#a1851f");
 
       removeThings();
 
@@ -157,14 +158,16 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
   if (failOrSuccess) {
     var content = {
       bodyBackgroundColor: "#499149",
-      subtitleText: "Parabéns, você passou!"
+      subtitleText: "Parabéns, você passou!",
+      themeColor: "#1e4b1e"
     };
   }
   else {
     var content = {
       bodyBackgroundColor: "#BC4F4F",
       iconBackgroundColor: "#3c8ca3",
-      subtitleText: "Você não passou :("
+      subtitleText: "Você não passou :(",
+      themeColor: "#591c1c"
     };
   }
 
@@ -174,6 +177,7 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
 
   $("body").css("background-color", content.bodyBackgroundColor);
   $("#floating-button").css("background", content.iconBackgroundColor);
+  $("meta[name=theme-color]").setAttribute("content", content.themeColor);
   $("#title").text("Sua média foi " + grid);
   createNewSubtitle(content.subtitleText, "new-subtitle");
   $('#reset-button').remove();

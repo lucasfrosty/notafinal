@@ -34,7 +34,7 @@ $(document).ready(function() {
       $("#title").text("Sua média foi " + grid);
       createNewSubtitle("Você terá que fazer a prova final precisando tirar "
       + howMuchNeededToPass(Number(grid)), "final-subtitle");
-      $("meta[name=theme-color]").setAttribute("content", "#a1851f");
+      $("meta[name=theme-color]").attr("content", "#a1851f");
 
       removeThings();
 
@@ -177,7 +177,7 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
 
   $("body").css("background-color", content.bodyBackgroundColor);
   $("#floating-button").css("background", content.iconBackgroundColor);
-  $("meta[name=theme-color]").setAttribute("content", content.themeColor);
+  $("meta[name=theme-color]").attr("content", content.themeColor);
   $("#title").text("Sua média foi " + grid);
   createNewSubtitle(content.subtitleText, "new-subtitle");
   $('#reset-button').remove();

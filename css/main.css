@@ -74,24 +74,24 @@ hr {
 
 .btn-reset {
     margin-top: 10px;
-    background: #666;
+    background: #3c8ca3;
     width: 270px;
     border-radius: 10px;
 }
 .btn-reset:hover {
-    background: #585555;
+    background: #2f697a;
     color: white;
 }
 
 .btn-reset-sm {
     margin-top: 10px;
-    background: #666;
+    background: #3c8ca3;
     width: 150px;
     border-radius: 10px;
 }
 
 .btn-reset-sm:hover {
-    background: #585555;
+    background: #2f697a;
     color: white;
 }
 
@@ -133,6 +133,15 @@ hr {
     bottom: 10px;
     right: 20px;
   }
+}
+
+
+/* iphone 5 */
+@media screen and (max-width: 320px) {
+  .title {
+    font-size: 3.5em;
+  }
+
 }
 
 footer {

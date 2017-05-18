@@ -34,7 +34,7 @@ $(document).ready(function() {
       $("#title").text("Sua média foi " + grid);
       createNewSubtitle("Você terá que fazer a prova final precisando tirar "
       + howMuchNeededToPass(Number(grid)), "final-subtitle");
-      $("meta[name=theme-color]").attr("content", "#a1851f");
+      $("meta[name=theme-color]").attr("content", "#dfba33");
 
       removeThings();
 
@@ -98,7 +98,8 @@ function createFinalGridInput() {
     "type": "tel",
     "class": "form-control grid",
     "maxLength": 4,
-    "placeholder": "Nota"
+    "placeholder": "Nota",
+    "style:" "max-width: 100px"
   });
   $(".form-inline").append($final_input);
 }
@@ -159,7 +160,7 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
     var content = {
       bodyBackgroundColor: "#499149",
       subtitleText: "Parabéns, você passou!",
-      themeColor: "#1e4b1e"
+      themeColor: "#499149"
     };
   }
   else {
@@ -167,7 +168,7 @@ function failOrSuccess(grid, failOrSuccess, isFinalInput) {
       bodyBackgroundColor: "#BC4F4F",
       iconBackgroundColor: "#3c8ca3",
       subtitleText: "Você não passou :(",
-      themeColor: "#591c1c"
+      themeColor: "#BC4F4F"
     };
   }
 
